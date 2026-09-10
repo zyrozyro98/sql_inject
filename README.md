@@ -1,18 +1,21 @@
 # Local Login Demo (Educational)
 
-This repository contains a small Flask-based demo for learning how login requests can be received and logged in a controlled local environment.
+This repository contains a small Flask-based security testing harness for learning how login requests can be handled and observed in a controlled local environment.
 
 ## Important notice
 
-- This project is intended for educational and sandbox use only.
+- This project is intended for education, defensive testing, and own-project validation only.
 - Use it only against systems you own or have explicit written permission to test.
-- Do not use it against third-party or production services without authorization.
+- Do not use it against third-party or production systems without authorization.
 
 ## Included
 
 - A local Flask server that exposes a simple `/login` endpoint
-- A sample client that can send test form or JSON payloads
-- Local capture of received payloads to `captured_creds.txt`
+- A test client that can send form or JSON payloads
+- Optional capture of received payloads to a file
+- Dry-run mode
+- JSON report export
+- Support for expected status checks
 
 ## Requirements
 
@@ -52,13 +55,25 @@ Use a JSON file with credentials:
 python test_login.py http://localhost:5000/login --no-local-server --credentials-file creds.json
 ```
 
+Run without sending any real requests (preview only):
+
+```bash
+python test_login.py http://localhost:5000/login --no-local-server --dry-run
+```
+
+Save a JSON report:
+
+```bash
+python test_login.py http://localhost:5000/login --no-local-server --report-file report.json
+```
+
 ## Example credentials file
 
 ```json
 {
   "credentials": [
-    {"username": "admin", "password": "admin123"},
-    {"username": "test", "password": "test123"}
+    {"username": "demo_user", "password": "demo_password"},
+    {"username": "demo_admin", "password": "demo_admin_password"}
   ]
 }
 ```
@@ -67,6 +82,7 @@ python test_login.py http://localhost:5000/login --no-local-server --credentials
 
 - The local demo is designed to help understand request handling, logging, and payload structure.
 - For real-world testing or production deployment, always follow your organization’s security policies and approval procedures.
+- This project intentionally avoids storing sensitive real credentials by default.
 
 ## Render deployment
 

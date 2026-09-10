@@ -89,6 +89,8 @@ python test_login.py http://localhost:5000/login --no-local-server --report-file
 If you want to host the demo on Render, create a new web service and use:
 
 - Build Command: `pip install -r requirements.txt`
-- Start Command: `python test_login.py`
+- Start Command: `gunicorn app:app`
+
+You can also set the environment variable `CAPTURE_FILE` if you want the app to write received payloads to a file on the server.
 
 > For Render, keep this as a lab/demo application only, not as a tool for attacking real systems.
